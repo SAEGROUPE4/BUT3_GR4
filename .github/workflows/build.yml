@@ -36,7 +36,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-          -Dsonar.projectKey=<project_key> \
-          -Dsonar.organization=<organization_key> \
+          -Dsonar.projectKey=SAEGROUPE4_BUT3_GR4 \
+          -Dsonar.organization=saegroupe4\
           -Dsurefire.failOnError=false \
           -Dsurefire.skipAfterFailureCount=0
