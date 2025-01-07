@@ -39,5 +39,5 @@ jobs:
           mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
           -Dsonar.projectKey=SAEGROUPE4_BUT3_GR4 \
           -Dsonar.organization=saegroupe4\
-          -Dsurefire.failOnError=false \
-          -Dsurefire.skipAfterFailureCount=0
+          -Dsonar.host.url=https://sonarcloud.io \
+          -DskipTests
