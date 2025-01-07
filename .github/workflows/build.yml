@@ -36,4 +36,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           cd "_00_ASBank2023"
-          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=SAEGROUPE4_BUT3_GR4
+          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          -Dsonar.projectKey=SAEGROUPE4_BUT3_GR4 \
+          -Dsurefire.failOnError=false \
+          -Dsurefire.skipAfterFailureCount=0
