@@ -30,6 +30,8 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+      - name: Build Docker Image
+        run: docker build -t asbank:latest ./_00_ASBank2023
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}  
