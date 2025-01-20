@@ -1,18 +1,15 @@
 package com.iut.banque.test.modele;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+
 
 import com.iut.banque.modele.Client;
-import com.iut.banque.modele.CompteSansDecouvert;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import com.iut.banque.exceptions.IllegalFormatException;
-import com.iut.banque.exceptions.IllegalOperationException;
-import com.iut.banque.exceptions.InsufficientFundsException;
-import com.iut.banque.modele.Utilisateur;
-import com.iut.banque.modele.Client;
+
 
 public class TestsUtilisateur {
 
@@ -48,6 +45,56 @@ public class TestsUtilisateur {
         assertEquals("clientpass3", utilisateur.getUserPwd());
     }
 
+    @Test
+    public void testToString() {
+        String expected = "Client [userId=a.b1, nom=Veneroso, prenom=Thomas, adresse=123 rue grande Metz, male=true, userPwd=clientpass3, numeroClient=1322456789, accounts=0]";
+        assertEquals(expected, utilisateur.toString());
+    }
+
+    @Test
+    public void testSetPrenom() {
+        utilisateur.setPrenom("Jane");
+
+
+
+        assertEquals("Jane", utilisateur.getPrenom());
+    }
+
+    @Test
+    public void testSetNom() {
+        utilisateur.setNom("Doe");
+
+        assertEquals("Doe", utilisateur.getNom());
+    }
+
+    @Test
+    public void testSetAdresse() {
+        utilisateur.setAdresse("14 rue grande Metz");
+
+        assertEquals("14 rue grande Metz", utilisateur.getAdresse());
+    }
+
+    @Test
+    public void testSetPwd() {
+        utilisateur.setUserPwd("test");
+
+
+        assertEquals("test", utilisateur.getUserPwd());
+    }
+
+    @Test
+    public void testSetMale() {
+        utilisateur.setMale(false);
+
+        assertEquals(false, utilisateur.isMale());
+    }
+
+    @Test
+    public void testSetUserId() throws IllegalFormatException {
+        utilisateur.setUserId("b.a2");
+
+        assertEquals("b.a2", utilisateur.getUserId());
+    }
 
 
 }
