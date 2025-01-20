@@ -27,7 +27,7 @@
 		onClick="DisplayMessage()" />
 	<p style="font-size: 2em">
 		<s:url action="redirectionLogin" var="redirectionLogin" ></s:url>
-		<s:a href="%{redirectionLogin}">Page de Login</s:a>
+		<s:a href="/jsp/redirectionLogin">Page de Login</s:a>
 	</p>
 </body>
 <jsp:include page="/JSP/Footer.jsp" />
