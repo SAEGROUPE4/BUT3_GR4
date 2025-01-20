@@ -140,4 +140,5 @@ public class TestsCompte {
 			fail("String " + strNumCompte + " validée dans le test");
 		}
 	}
+
 }

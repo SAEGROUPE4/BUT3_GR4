@@ -85,4 +85,41 @@ public class TestsCompteAvecDecouvert {
 		}
 	}
 
+	@Test
+	public void testSetDecouvertAutorise() {
+		try {
+			compte.setDecouverAutorise(200);
+			assertEquals(200, compte.getDecouvertAutorise(), 0.001);
+		} catch (IllegalFormatException | IllegalOperationException e) {
+			fail("Exception should not have been thrown");
+		}
+	}
+
+	@Test
+	public void testSetDecouvertAutoriseNegative() {
+		try {
+			compte.setDecouverAutorise(-50);
+			fail("Exception should have been thrown");
+		} catch (IllegalFormatException e) {
+			// Expected exception
+		} catch (IllegalOperationException e) {
+			fail("IllegalFormatException should have been thrown");
+		}
+	}
+
+	@Test
+	public void testSetDecouvertAutoriseIncompatible() {
+		try {
+			compte.debiter(150); // Set balance to -50
+			compte.setDecouverAutorise(30);
+			fail("Exception should have been thrown");
+		} catch (IllegalFormatException e) {
+			fail("IllegalOperationException should have been thrown");
+		} catch (IllegalOperationException e) {
+			// Expected exception
+		} catch (InsufficientFundsException e) {
+			fail("InsufficientFundsException should not have been thrown");
+		}
+	}
+
 }
