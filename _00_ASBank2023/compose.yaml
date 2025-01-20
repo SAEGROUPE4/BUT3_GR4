@@ -8,6 +8,7 @@ services:
       - "8083:8080"
     depends_on:
       - db
+      - db_test
     networks:
       - java
   db:
@@ -26,8 +27,25 @@ services:
     networks:
       - java
 
+  db_test:
+    image: mysql:8.0
+    container_name: bankiut_db_test
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: java_test
+      MYSQL_USER: testuser
+      MYSQL_PASSWORD: testpassword
+    ports:
+      - "3308:3306"
+    volumes:
+      - db_data_test:/var/lib/mysql
+      - ./script/dumpSQL_JUnitTest.sql:/docker-entrypoint-initdb.d/dumpSQL_JUnitTest.sql
+    networks:
+      - java
+
 volumes:
   db_data2:
+  db_data_test:
 
 networks:
   java:

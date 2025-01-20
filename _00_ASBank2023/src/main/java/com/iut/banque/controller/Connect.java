@@ -77,6 +77,13 @@ public class Connect extends ActionSupport {
 		}
 	}
 
+	public String retourTableauDeBordClient() {
+		// Logique pour actualiser les données nécessaires
+
+
+		return "SUCCESS";
+	}
+
 	/**
 	 * Getter du champ userCde
 	 * 
