@@ -1,1 +1,0 @@
-Lorsque l'on accède à un compte et que l'on veut débiter de l'argent sur celui-ci, cela n'avait pas l'effet escompté. En effet, l'argent n'était pas débité mais crédité.
