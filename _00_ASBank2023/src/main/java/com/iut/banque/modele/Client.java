@@ -97,6 +97,7 @@ public class Client extends Utilisateur {
 	 */
 	public Client(String nom, String prenom, String adresse, boolean homme, String usrId, String usrPwd,
 			String numeroClient) throws IllegalArgumentException, IllegalFormatException {
+
 		super(nom, prenom, adresse, homme, null, usrPwd);
 		setUserId(usrId);
 		setNumeroClient(numeroClient);
