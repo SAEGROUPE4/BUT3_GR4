@@ -49,13 +49,21 @@
 		</s:if>
 		<br />
 	</p>
-	<s:form name="formOperation" action="creditAction" method="post">
-		<s:textfield label="Montant" name="montant" />
-		<input type="hidden" name="compte"
-			value="<s:property value='compte' />">
-		<s:submit value="Crediter" />
-		<s:submit value="Debiter" action="debitAction" />
-	</s:form>
+	<div>
+
+		<s:form name="formOperation" method="post" action="creditAction">
+			<s:textfield label="Montant" name="montant" />
+			<input type="hidden" name="compte" value="<s:property value='compte' />" />
+			<s:submit value="Crediter" />
+		</s:form>
+
+		<s:form name="formOperation" method="post" action="debitAction">
+			<s:textfield label="Montant" name="montant" />
+			<input type="hidden" name="compte" value="<s:property value='compte' />" />
+			<s:submit value="Debiter" />
+		</s:form>
+
+	</div>
 
 	<s:url action="urlDetail" var="urlDetail">
 		<s:param name="compte">

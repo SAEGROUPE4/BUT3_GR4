@@ -340,8 +340,73 @@ public class TestsDaoHibernate {
 		assertEquals(false, daoHibernate.isUserAllowed("    ", "TEST PASS"));
 	}
 
-	// TODO À implémenter lorsque disconnect() le sera
-	/*
-	 * @Test public void testDisconnect() { fail("Not yet implemented"); }
-	 */
+	@Test
+	public void testUpdateAccountWithCrediter() {
+		Compte account = daoHibernate.getAccountById("SA1011011011");
+		if (account == null) {
+			fail("Le compte n'existe pas dans la base de données.");
+		}
+		double soldeActuel = account.getSolde();
+
+		double montantACrediter = 100.0;
+
+		try {
+			account.crediter(montantACrediter);
+		} catch (IllegalFormatException e) {
+			fail("Aucune exception ne devrait être levée pour un montant positif.");
+		}
+
+		daoHibernate.updateAccount(account);
+
+		Compte updatedAccount = daoHibernate.getAccountById("SA1011011011");
+		if (updatedAccount == null) {
+			fail("Le compte n'a pas été récupéré après mise à jour.");
+		}
+
+		assertEquals(
+				"Le solde du compte n'a pas été correctement mis à jour.",
+				soldeActuel + montantACrediter,
+				updatedAccount.getSolde(),
+				0.001
+		);
+	}
+
+
+	@Test
+	public void testUpdateUser() {
+		Client client = (Client) daoHibernate.getUserById("c.exist");
+
+		if (client == null) {
+			fail("L'utilisateur n'existe pas dans la base de données.");
+		}
+
+		String nouvelAdresse = "Nouvelle Adresse";
+		String nouveauNom = "Nouveau Nom";
+		client.setAdresse(nouvelAdresse);
+		client.setNom(nouveauNom);
+
+		daoHibernate.updateUser(client);
+
+		Client updatedClient = (Client) daoHibernate.getUserById("c.exist");
+		if (updatedClient == null) {
+			fail("L'utilisateur n'a pas été récupéré après mise à jour.");
+		}
+
+		assertEquals("L'adresse de l'utilisateur n'a pas été correctement mise à jour.", nouvelAdresse, updatedClient.getAdresse());
+		assertEquals("Le nom de l'utilisateur n'a pas été correctement mis à jour.", nouveauNom, updatedClient.getNom());
+
+	}
+
+	@Test
+	public void testDisconnect() { // la methode disconnect doit etre implemente
+		try {
+			daoHibernate.disconnect();
+			assertTrue("La méthode disconnect a été appelée avec succès.", true);
+		} catch (Exception e) {
+			fail("La méthode disconnect ne devrait pas lever d'exception.");
+		}
+	}
+
+
+
 }

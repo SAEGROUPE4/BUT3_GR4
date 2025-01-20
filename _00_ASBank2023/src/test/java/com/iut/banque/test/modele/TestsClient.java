@@ -1,15 +1,33 @@
 package com.iut.banque.test.modele;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import com.iut.banque.exceptions.IllegalFormatException;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.iut.banque.modele.Client;
+import com.iut.banque.modele.Compte;
 import com.iut.banque.modele.CompteAvecDecouvert;
 import com.iut.banque.modele.CompteSansDecouvert;
 
-public class TestsClient {
+import java.util.HashMap;
+import java.util.Map;
 
+public class TestsClient {
+	private Client utilisateur;
+	private CompteSansDecouvert compte;
+	private Map<String, Compte> testAccounts;
+
+	@Before
+	public void setUp() throws IllegalFormatException {
+		utilisateur = new Client("Veneroso", "Thomas", "123 rue grande Metz", true, "a.b1","clientpass3","1322456789");
+		compte = new CompteSansDecouvert("FR0123456689", 100, new Client());
+
+		testAccounts = new HashMap<>();
+		testAccounts.put(compte.getNumeroCompte(), compte);
+	}
 	/**
 	 * Tests successifs de la méthode de vérification du format de numéro de
 	 * client
@@ -255,6 +273,48 @@ public class TestsClient {
 		} catch (Exception e) {
 			fail("Exception récupérée -> " + e.getStackTrace().toString());
 		}
+	}
+
+	@Test
+	public void testSetAccounts(){
+
+	}
+
+	@Test
+	public void testSetUserIdSuccess() throws IllegalFormatException{
+		utilisateur.setUserId("b.a2");
+		assertEquals("b.a2", utilisateur.getUserId());
+	}
+
+
+	@Test
+	public void testSetNumeroClientSuccess() throws IllegalFormatException{
+		utilisateur.setNumeroClient("1234566789");
+		assertEquals("1234566789", utilisateur.getNumeroClient());
+	}
+
+
+
+	@Test
+	public void testToString() {
+		String expected = "Client [userId=a.b1, nom=Veneroso, prenom=Thomas, adresse=123 rue grande Metz, male=true, userPwd=clientpass3, numeroClient=1322456789, accounts=0]";
+		assertEquals(expected, utilisateur.toString());
+	}
+
+	@Test
+	public void testGetIdentity(){
+		String expected = "Thomas Veneroso (1322456789)";
+		assertEquals(expected, utilisateur.getIdentity());
+	}
+
+	@Test
+	public void testSetAccount() {
+		utilisateur.setAccounts(testAccounts);
+
+		Map<String, Compte> accounts = utilisateur.getAccounts();
+
+		assertEquals(1, accounts.size());
+		assertEquals(compte, accounts.get("FR0123456689"));
 	}
 
 }
