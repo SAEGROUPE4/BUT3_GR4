@@ -1,20 +1,16 @@
 package com.iut.banque.controller;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Map;
-
-import org.apache.struts2.ServletActionContext;
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
-
-import com.opensymphony.xwork2.ActionSupport;
-
 import com.iut.banque.constants.LoginConstants;
 import com.iut.banque.facade.BanqueFacade;
 import com.iut.banque.modele.Client;
 import com.iut.banque.modele.Compte;
 import com.iut.banque.modele.Utilisateur;
+import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.ServletActionContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
+import java.util.Map;
 
 public class Connect extends ActionSupport {
 
@@ -22,6 +18,12 @@ public class Connect extends ActionSupport {
 	private String userCde;
 	private String userPwd;
 	private BanqueFacade banque;
+	private static final String SUCCESS = "SUCCESS";
+
+	// Constructeur sans dépendances externes
+	public Connect(BanqueFacade banqueFacade) {
+		this.banque = banqueFacade;
+	}
 
 	/**
 	 * Constructeur de la classe Connect
@@ -64,7 +66,7 @@ public class Connect extends ActionSupport {
 		switch (loginResult) {
 		case LoginConstants.USER_IS_CONNECTED:
 			System.out.println("user logged in");
-			return "SUCCESS";
+			return SUCCESS;
 		case LoginConstants.MANAGER_IS_CONNECTED:
 			System.out.println("manager logged in");
 			return "SUCCESSMANAGER";
@@ -81,7 +83,7 @@ public class Connect extends ActionSupport {
 		// Logique pour actualiser les données nécessaires
 
 
-		return "SUCCESS";
+		return SUCCESS;
 	}
 
 	/**
@@ -146,7 +148,7 @@ public class Connect extends ActionSupport {
 	public String logout() {
 		System.out.println("Logging out");
 		banque.logout();
-		return "SUCCESS";
+		return SUCCESS;
 	}
 
 

@@ -26,6 +26,9 @@ public class CreerCompte extends ActionSupport {
 	private BanqueFacade banque;
 	private Compte compte;
 
+	public CreerCompte(BanqueFacade banque) {
+		this.banque = banque;
+	}
 	/**
 	 * @param compte
 	 *            the compte to set

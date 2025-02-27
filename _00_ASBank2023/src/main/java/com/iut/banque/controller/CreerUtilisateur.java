@@ -28,6 +28,9 @@ public class CreerUtilisateur extends ActionSupport {
 	private String message;
 	private String result;
 
+	public CreerUtilisateur(BanqueFacade banqueFacade) {
+		this.banque = banqueFacade;
+	}
 	/**
 	 * @return the userId
 	 */
@@ -230,5 +233,9 @@ public class CreerUtilisateur extends ActionSupport {
 			this.result = "ERROR";
 			return "ERROR";
 		}
+	}
+
+	public void setBanque(BanqueFacade banque) {
+		this.banque = banque;
 	}
 }

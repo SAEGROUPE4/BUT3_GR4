@@ -30,6 +30,9 @@ public class ListeCompteManager extends ActionSupport {
 	 * @return Un objet de type Connect avec façade BanqueFacade provenant de sa
 	 *         factory
 	 */
+	public ListeCompteManager(BanqueFacade banque) {
+		this.banque = banque;
+	}
 	public ListeCompteManager() {
 		System.out.println("In Constructor from ListeCompteManager class ");
 		ApplicationContext context = WebApplicationContextUtils

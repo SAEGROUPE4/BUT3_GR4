@@ -28,6 +28,10 @@ public class DetailCompte extends ActionSupport {
 	 * @return un nouvel objet DetailCompte avec une BanqueFacade provenant de
 	 *         la factory
 	 */
+
+	public DetailCompte(BanqueFacade banque) {
+		this.banque = banque;
+	}
 	public DetailCompte() {
 		System.out.println("In Constructor from DetailCompte class ");
 		ApplicationContext context = WebApplicationContextUtils
