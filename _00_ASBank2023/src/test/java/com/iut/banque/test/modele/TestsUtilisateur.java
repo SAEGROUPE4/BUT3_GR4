@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 import com.iut.banque.modele.Client;
 
+import com.iut.banque.modele.Utilisateur;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -46,9 +47,11 @@ public class TestsUtilisateur {
     }
 
     @Test
-    public void testToString() {
-        String expected = "Client [userId=a.b1, nom=Veneroso, prenom=Thomas, adresse=123 rue grande Metz, male=true, userPwd=clientpass3, numeroClient=1322456789, accounts=0]";
-        assertEquals(expected, utilisateur.toString());
+    public void testToStringUtilisateur() {
+        Utilisateur user = new Utilisateur("Veneroso", "Thomas", "123 rue grande Metz", true, "a.b1", "clientpass3") {
+        };
+        String expected = "Utilisateur [userId=a.b1, nom=Veneroso, prenom=Thomas, adresse=123 rue grande Metz, male=true, userPwd=clientpass3]";
+        assertEquals(expected, user.toString());
     }
 
     @Test

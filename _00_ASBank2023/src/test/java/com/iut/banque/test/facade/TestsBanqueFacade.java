@@ -1,6 +1,7 @@
 package com.iut.banque.test.facade;
 
 import com.iut.banque.exceptions.IllegalFormatException;
+import com.iut.banque.exceptions.IllegalOperationException;
 import com.iut.banque.exceptions.InsufficientFundsException;
 import com.iut.banque.exceptions.TechnicalException;
 import com.iut.banque.facade.BanqueFacade;
@@ -36,12 +37,9 @@ public class TestsBanqueFacade {
     @Autowired
     private IDao dao;
 
-
-
     @Test
     public void testGetConnectedUser() {
-        Utilisateur utilisateur = new Utilisateur("name", "firstname", "adress", false, "test", "test") {
-        };
+        Utilisateur utilisateur = new Utilisateur("name", "firstname", "adress", false, "test", "test") {};
         loginManager.setCurrentUser(utilisateur);
 
         Utilisateur connectedUser = banqueFacade.getConnectedUser();
@@ -49,16 +47,15 @@ public class TestsBanqueFacade {
         assertNotNull("L'utilisateur connecté ne doit pas être null", connectedUser);
         assertEquals("L'utilisateur connecté n'est pas celui attendu", utilisateur, connectedUser);
     }
+
     @Test
     public void testTryLogin() {
         String userId = "testUser";
         String userPwd = "password123";
         int result = banqueFacade.tryLogin(userId, userPwd);
 
-
         assertEquals("Le résultat de la tentative de login n'est pas correct", -1, result);
     }
-
 
     @Test
     public void testCrediter() {
@@ -78,7 +75,6 @@ public class TestsBanqueFacade {
         }
     }
 
-    // Test for debiting an account
     @Test
     public void testDebiter() {
         try {
@@ -97,7 +93,6 @@ public class TestsBanqueFacade {
         }
     }
 
-    // Test for creating a client
     @Test
     public void testCreateClient() {
         try {
@@ -112,7 +107,6 @@ public class TestsBanqueFacade {
         }
     }
 
-    // Test for creating a manager
     @Test
     public void testCreateManager() {
         try {
@@ -133,6 +127,31 @@ public class TestsBanqueFacade {
             banqueFacade.createAccount(numeroCompte, client);
         } catch (TechnicalException | IllegalFormatException e) {
             fail("Aucune exception ne devrait être levée lors de la création du compte : " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void testLogout() {
+        Utilisateur utilisateur = new Utilisateur("name", "firstname", "adress", false, "test", "test") {};
+        loginManager.setCurrentUser(utilisateur);
+
+        banqueFacade.logout();
+
+        assertNull("L'utilisateur connecté ne doit pas être le même après la déconnexion", loginManager.getConnectedUser());
+    }
+
+    @Test
+    public void testDeleteUser() {
+        try {
+            Utilisateur utilisateur = banqueManager.getUserById("g.exist");
+            if (utilisateur == null) {
+                fail("L'utilisateur n'existe pas dans la base de données.");
+            }
+
+            banqueFacade.deleteUser(utilisateur);
+            assertNull("L'utilisateur doit être supprimé.", banqueManager.getUserById("u.exist"));
+        } catch (TechnicalException | IllegalOperationException e) {
+            fail("Aucune exception ne devrait être levée lors de la suppression de l'utilisateur.");
         }
     }
 
