@@ -238,4 +238,8 @@ public class CreerUtilisateur extends ActionSupport {
 	public void setBanque(BanqueFacade banque) {
 		this.banque = banque;
 	}
+
+	public BanqueFacade getBanque() {
+		return banque;
+	}
 }

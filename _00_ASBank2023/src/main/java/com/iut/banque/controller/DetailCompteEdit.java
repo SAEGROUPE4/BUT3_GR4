@@ -52,7 +52,6 @@ public class DetailCompteEdit extends DetailCompte {
 			banque.changeDecouvert((CompteAvecDecouvert) getCompte(), decouvert);
 			return "SUCCESS";
 		} catch (NumberFormatException nfe) {
-			nfe.printStackTrace();
 			return "ERROR";
 		} catch (IllegalFormatException e) {
 			return "NEGATIVEOVERDRAFT";

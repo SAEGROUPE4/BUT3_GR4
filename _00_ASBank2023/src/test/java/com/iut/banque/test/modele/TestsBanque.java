@@ -84,4 +84,8 @@ public class TestsBanque {
             fail("Exception should not have been thrown");
         }
     }
+    @Test
+    public void testGetAccounts(){
+        assertEquals(2, banque.getAccounts().size());
+    }
 }

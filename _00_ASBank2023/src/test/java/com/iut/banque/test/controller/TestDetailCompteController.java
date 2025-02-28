@@ -130,4 +130,9 @@ public class TestDetailCompteController {
         when(compte.getNumeroCompte()).thenReturn("1234");
         assertNull(detailCompte.getCompte());
     }
+    @Test
+    public void testSetAndGetMontant() {
+        detailCompte.setMontant("500");
+        assertEquals("500", detailCompte.getMontant());
+    }
 }

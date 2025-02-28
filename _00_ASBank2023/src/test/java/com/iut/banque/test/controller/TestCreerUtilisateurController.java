@@ -12,7 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -85,5 +85,45 @@ public class TestCreerUtilisateurController {
         String result = creerUtilisateur.creationUtilisateur();
         assertEquals("ERROR", result);
         assertEquals("Format du numéro de client incorrect.", creerUtilisateur.getMessage());
+    }
+
+    @Test
+    public void testGettersAndSetters() {
+        creerUtilisateur.setUserId("newUser");
+        assertEquals("newUser", creerUtilisateur.getUserId());
+
+        creerUtilisateur.setNom("NewName");
+        assertEquals("NewName", creerUtilisateur.getNom());
+
+        creerUtilisateur.setPrenom("NewPrenom");
+        assertEquals("NewPrenom", creerUtilisateur.getPrenom());
+
+        creerUtilisateur.setAdresse("New Address");
+        assertEquals("New Address", creerUtilisateur.getAdresse());
+
+        creerUtilisateur.setUserPwd("NewPassword");
+        assertEquals("NewPassword", creerUtilisateur.getUserPwd());
+
+        creerUtilisateur.setMale(false);
+        assertFalse(creerUtilisateur.isMale());
+
+        creerUtilisateur.setClient(false);
+        assertFalse(creerUtilisateur.isClient());
+
+        creerUtilisateur.setNumClient("NewNumClient");
+        assertEquals("NewNumClient", creerUtilisateur.getNumClient());
+
+        creerUtilisateur.setMessage("New Message");
+        assertEquals("New Message", creerUtilisateur.getMessage());
+
+        creerUtilisateur.setResult("NEW_RESULT");
+        assertEquals("NEW_RESULT", creerUtilisateur.getResult());
+    }
+
+    @Test
+    public void testSetBanque() {
+        BanqueFacade newBanqueFacade = mock(BanqueFacade.class);
+        creerUtilisateur.setBanque(newBanqueFacade);
+        assertSame(newBanqueFacade, creerUtilisateur.getBanque());
     }
 }

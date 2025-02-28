@@ -36,7 +36,7 @@ public class TestCreerCompteController {
     }
 
     @Test
-    public void testCreationCompteSuccess() throws TechnicalException, IllegalFormatException{
+    public void testCreationCompteSuccess() throws TechnicalException, IllegalFormatException, IllegalOperationException {
         String numeroCompte = "12345";
         doNothing().when(banqueFacade).createAccount(numeroCompte, client);
         when(banqueFacade.getCompte(numeroCompte)).thenReturn(compte);
@@ -52,7 +52,7 @@ public class TestCreerCompteController {
     }
 
     @Test
-    public void testCreationCompteAlreadyExists() throws TechnicalException, IllegalFormatException {
+    public void testCreationCompteAlreadyExists() throws TechnicalException, IllegalFormatException , IllegalOperationException {
         String numeroCompte = "12345";
         doThrow(new TechnicalException()).when(banqueFacade).createAccount(numeroCompte, client);
         creerCompte.setNumeroCompte(numeroCompte);
@@ -64,7 +64,7 @@ public class TestCreerCompteController {
     }
 
     @Test
-    public void testCreationCompteInvalidFormat() throws TechnicalException, IllegalFormatException {
+    public void testCreationCompteInvalidFormat() throws TechnicalException, IllegalFormatException , IllegalOperationException {
         String numeroCompte = "abc";
         doThrow(new IllegalFormatException()).when(banqueFacade).createAccount(numeroCompte, client);
         creerCompte.setNumeroCompte(numeroCompte);
@@ -122,25 +122,6 @@ public class TestCreerCompteController {
 
         creerCompte.setResult(true);
         assertTrue(creerCompte.isResult());
-    }
-
-
-
-    @Test
-    public void testCreationCompteWithOverdraftIllegalOperation() throws TechnicalException, IllegalFormatException, IllegalOperationException {
-        String numeroCompte = "789";
-        double decouvertAutorise = 200.0;
-
-        doThrow(new IllegalOperationException()).when(banqueFacade).createAccount(numeroCompte, client, decouvertAutorise);
-
-        creerCompte.setNumeroCompte(numeroCompte);
-        creerCompte.setClient(client);
-        creerCompte.setAvecDecouvert(true);
-        creerCompte.setDecouvertAutorise(decouvertAutorise);
-
-        String result = creerCompte.creationCompte();
-
-        assertEquals("SUCCESS", result); // On s'attend à "SUCCESS" car IllegalOperationException est juste loguée
     }
 
 

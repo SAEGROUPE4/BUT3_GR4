@@ -187,13 +187,14 @@ public class CreerCompte extends ActionSupport {
 	 * 
 	 * @return une chaine déterminant le résultat de l'action
 	 */
-	public String creationCompte() {
+	public String creationCompte() throws IllegalOperationException{
 		try {
 			if (avecDecouvert) {
 				try {
 					banque.createAccount(numeroCompte, client, decouvertAutorise);
-				} catch (IllegalOperationException e) {
-					e.printStackTrace();
+				}
+				finally {
+					this.compte = banque.getCompte(numeroCompte);
 				}
 			} else {
 				banque.createAccount(numeroCompte, client);

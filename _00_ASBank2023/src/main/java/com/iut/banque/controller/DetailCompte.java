@@ -134,13 +134,10 @@ public class DetailCompte extends ActionSupport {
 			banque.debiter(compte, Double.parseDouble(montant.trim()));
 			return "SUCCESS";
 		} catch (NumberFormatException e) {
-			e.printStackTrace();
 			return "ERROR";
 		} catch (InsufficientFundsException ife) {
-			ife.printStackTrace();
 			return "NOTENOUGHFUNDS";
 		} catch (IllegalFormatException e) {
-			e.printStackTrace();
 			return "NEGATIVEAMOUNT";
 		}
 	}
@@ -157,10 +154,8 @@ public class DetailCompte extends ActionSupport {
 			banque.crediter(compte, Double.parseDouble(montant.trim()));
 			return "SUCCESS";
 		} catch (NumberFormatException nfe) {
-			nfe.printStackTrace();
 			return "ERROR";
 		} catch (IllegalFormatException e) {
-			e.printStackTrace();
 			return "NEGATIVEAMOUNT";
 		}
 	}

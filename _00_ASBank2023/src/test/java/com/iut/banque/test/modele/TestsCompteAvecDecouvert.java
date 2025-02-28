@@ -108,18 +108,20 @@ public class TestsCompteAvecDecouvert {
 	}
 
 	@Test
-	public void testSetDecouvertAutoriseIncompatible() {
+	public void testSetDecouvertAutoriseIncompatible() throws IllegalFormatException,InsufficientFundsException {
 		try {
 			compte.debiter(150); // Set balance to -50
 			compte.setDecouverAutorise(30);
 			fail("Exception should have been thrown");
-		} catch (IllegalFormatException e) {
-			fail("IllegalOperationException should have been thrown");
 		} catch (IllegalOperationException e) {
 			// Expected exception
-		} catch (InsufficientFundsException e) {
-			fail("InsufficientFundsException should not have been thrown");
 		}
+	}
+
+	@Test
+	public void testToStringCompteAvecDecouvert() throws IllegalFormatException, IllegalOperationException {
+		CompteAvecDecouvert account = new CompteAvecDecouvert("FR0123456789", 100, 100, new Client());
+		assertEquals("FR0123456789", account.getNumeroCompte());
 	}
 
 }

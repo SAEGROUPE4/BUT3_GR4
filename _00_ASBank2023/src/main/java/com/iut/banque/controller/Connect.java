@@ -59,7 +59,6 @@ public class Connect extends ActionSupport {
 			loginResult = banque.tryLogin(userCde, userPwd);
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			loginResult = LoginConstants.ERROR;
 		}
 

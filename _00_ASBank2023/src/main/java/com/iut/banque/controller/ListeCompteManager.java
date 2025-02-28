@@ -141,10 +141,8 @@ public class ListeCompteManager extends ActionSupport {
 			banque.deleteUser(client);
 			return "SUCCESS";
 		} catch (TechnicalException e) {
-			e.printStackTrace();
 			return "ERROR";
 		} catch (IllegalOperationException ioe) {
-			ioe.printStackTrace();
 			return "NONEMPTYACCOUNT";
 		}
 	}
@@ -160,10 +158,8 @@ public class ListeCompteManager extends ActionSupport {
 			banque.deleteAccount(compte);
 			return "SUCCESS";
 		} catch (IllegalOperationException e) {
-			e.printStackTrace();
 			return "NONEMPTYACCOUNT";
 		} catch (TechnicalException e) {
-			e.printStackTrace();
 			return "ERROR";
 		}
 	}

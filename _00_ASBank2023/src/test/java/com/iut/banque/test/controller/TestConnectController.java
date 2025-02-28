@@ -62,6 +62,29 @@ public class TestConnectController {
     }
 
     @Test
+    public void testLogin_NullUserCdeOrPwd() {
+        connect.setUserCde(null);
+        connect.setUserPwd("password");
+        String result = connect.login();
+        assertEquals("ERROR", result);
+
+        connect.setUserCde("user123");
+        connect.setUserPwd(null);
+        result = connect.login();
+        assertEquals("ERROR", result);
+    }
+
+    @Test
+    public void testLogin_Exception() {
+        when(banqueFacade.tryLogin("user123", "password")).thenThrow(new RuntimeException("Database Error"));
+        connect.setUserCde("user123");
+        connect.setUserPwd("password");
+
+        String result = connect.login();
+        assertEquals("ERROR", result);
+    }
+
+    @Test
     public void testLogout() {
         doNothing().when(banqueFacade).logout();
         String result = connect.logout();
