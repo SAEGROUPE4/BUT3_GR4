@@ -37,9 +37,6 @@ jobs:
           cd _00_ASBank2023
           docker compose up -d
           sleep 30
-      - name: Try mvn clean install
-        working-directory: _00_ASBank2023
-        run: mvn clean install
       - name: Build Docker Image
         run: docker build -t asbank:latest ./_00_ASBank2023
       - name: Build and analyze
