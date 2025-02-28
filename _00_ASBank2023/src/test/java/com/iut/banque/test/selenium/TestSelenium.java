@@ -16,7 +16,7 @@ public class TestSelenium {
     JavascriptExecutor js;
     @Before
     public void setUp() {
-        System.setProperty("webdriver.edge.driver", "src\\main\\resources\\msedgedriver.exe");
+        System.setProperty("webdriver.edge.driver", "src/main/resources/msedgedriver.exe");
         driver = new EdgeDriver();
         js = (JavascriptExecutor) driver;
         vars = new HashMap<>();
