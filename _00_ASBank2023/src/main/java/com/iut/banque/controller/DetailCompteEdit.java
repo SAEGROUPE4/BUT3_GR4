@@ -2,6 +2,7 @@ package com.iut.banque.controller;
 
 import com.iut.banque.exceptions.IllegalFormatException;
 import com.iut.banque.exceptions.IllegalOperationException;
+import com.iut.banque.facade.BanqueFacade;
 import com.iut.banque.modele.CompteAvecDecouvert;
 
 public class DetailCompteEdit extends DetailCompte {
@@ -12,6 +13,10 @@ public class DetailCompteEdit extends DetailCompte {
 	/**
 	 * Constructeur sans argument de DetailCompteEdit
 	 */
+
+	public DetailCompteEdit(BanqueFacade banque) {
+		super(banque);
+	}
 	public DetailCompteEdit() {
 		super();
 		System.out.println("======================================");
@@ -47,7 +52,6 @@ public class DetailCompteEdit extends DetailCompte {
 			banque.changeDecouvert((CompteAvecDecouvert) getCompte(), decouvert);
 			return "SUCCESS";
 		} catch (NumberFormatException nfe) {
-			nfe.printStackTrace();
 			return "ERROR";
 		} catch (IllegalFormatException e) {
 			return "NEGATIVEOVERDRAFT";

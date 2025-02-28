@@ -1,17 +1,17 @@
 package com.iut.banque.test.converter;
 
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
-import com.iut.banque.exceptions.IllegalFormatException;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.*;
-import com.opensymphony.xwork2.conversion.TypeConversionException;
 import com.iut.banque.converter.ClientConverter;
 import com.iut.banque.interfaces.IDao;
 import com.iut.banque.modele.Client;
-import java.util.Map;
+import com.opensymphony.xwork2.conversion.TypeConversionException;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.util.Arrays;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class TestsClientConverter {
 

@@ -82,5 +82,10 @@ public class TestsCompteSansDecouvert {
 		} catch (InsufficientFundsException e) {
 		}
 	}
+	@Test
+	public void testToStringCompteSansDecouvert() throws IllegalFormatException {
+		CompteSansDecouvert account = new CompteSansDecouvert("FR0123456789", 100, new Client());
+		assertEquals("FR0123456789", account.getNumeroCompte());
+	}
 
 }

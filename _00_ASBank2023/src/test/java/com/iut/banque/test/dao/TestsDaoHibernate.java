@@ -1,11 +1,10 @@
 package com.iut.banque.test.dao;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.util.Map;
-
+import com.iut.banque.dao.DaoHibernate;
+import com.iut.banque.exceptions.IllegalFormatException;
+import com.iut.banque.exceptions.IllegalOperationException;
+import com.iut.banque.exceptions.TechnicalException;
+import com.iut.banque.modele.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +12,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.iut.banque.dao.DaoHibernate;
-import com.iut.banque.exceptions.IllegalFormatException;
-import com.iut.banque.exceptions.IllegalOperationException;
-import com.iut.banque.exceptions.TechnicalException;
-import com.iut.banque.modele.Client;
-import com.iut.banque.modele.Compte;
-import com.iut.banque.modele.CompteAvecDecouvert;
-import com.iut.banque.modele.CompteSansDecouvert;
-import com.iut.banque.modele.Gestionnaire;
-import com.iut.banque.modele.Utilisateur;
-import org.junit.Ignore;
+import java.util.Map;
+
+import static org.junit.Assert.*;
 /**
  * Class de test pour la DAO.
  * 

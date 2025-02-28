@@ -276,11 +276,6 @@ public class TestsClient {
 	}
 
 	@Test
-	public void testSetAccounts(){
-
-	}
-
-	@Test
 	public void testSetUserIdSuccess() throws IllegalFormatException{
 		utilisateur.setUserId("b.a2");
 		assertEquals("b.a2", utilisateur.getUserId());

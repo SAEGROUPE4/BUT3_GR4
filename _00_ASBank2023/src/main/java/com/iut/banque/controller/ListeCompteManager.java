@@ -30,6 +30,9 @@ public class ListeCompteManager extends ActionSupport {
 	 * @return Un objet de type Connect avec façade BanqueFacade provenant de sa
 	 *         factory
 	 */
+	public ListeCompteManager(BanqueFacade banque) {
+		this.banque = banque;
+	}
 	public ListeCompteManager() {
 		System.out.println("In Constructor from ListeCompteManager class ");
 		ApplicationContext context = WebApplicationContextUtils
@@ -138,10 +141,8 @@ public class ListeCompteManager extends ActionSupport {
 			banque.deleteUser(client);
 			return "SUCCESS";
 		} catch (TechnicalException e) {
-			e.printStackTrace();
 			return "ERROR";
 		} catch (IllegalOperationException ioe) {
-			ioe.printStackTrace();
 			return "NONEMPTYACCOUNT";
 		}
 	}
@@ -157,10 +158,8 @@ public class ListeCompteManager extends ActionSupport {
 			banque.deleteAccount(compte);
 			return "SUCCESS";
 		} catch (IllegalOperationException e) {
-			e.printStackTrace();
 			return "NONEMPTYACCOUNT";
 		} catch (TechnicalException e) {
-			e.printStackTrace();
 			return "ERROR";
 		}
 	}

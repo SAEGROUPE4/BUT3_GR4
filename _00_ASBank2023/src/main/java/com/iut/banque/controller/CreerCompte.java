@@ -26,6 +26,9 @@ public class CreerCompte extends ActionSupport {
 	private BanqueFacade banque;
 	private Compte compte;
 
+	public CreerCompte(BanqueFacade banque) {
+		this.banque = banque;
+	}
 	/**
 	 * @param compte
 	 *            the compte to set
@@ -184,13 +187,14 @@ public class CreerCompte extends ActionSupport {
 	 * 
 	 * @return une chaine déterminant le résultat de l'action
 	 */
-	public String creationCompte() {
+	public String creationCompte() throws IllegalOperationException{
 		try {
 			if (avecDecouvert) {
 				try {
 					banque.createAccount(numeroCompte, client, decouvertAutorise);
-				} catch (IllegalOperationException e) {
-					e.printStackTrace();
+				}
+				finally {
+					this.compte = banque.getCompte(numeroCompte);
 				}
 			} else {
 				banque.createAccount(numeroCompte, client);
